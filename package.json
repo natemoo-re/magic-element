@@ -1,5 +1,5 @@
 {
-  "name": "@clack/root",
+  "name": "root",
   "private": true,
   "type": "module",
   "scripts": {
@@ -22,7 +22,7 @@
     "typescript": "^4.9.5",
     "unbuild": "^1.1.1"
   },
-  "packageManager": "pnpm@7.6.0",
+  "packageManager": "pnpm@8.6.12",
   "volta": {
     "node": "16.19.0"
   }
