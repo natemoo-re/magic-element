@@ -8,8 +8,11 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.mjs"
+    },
+    "./astro": {
+      "types": "./MagicElement.astro",
+      "import": "./MagicElement.astro"
     },
     "./package.json": "./package.json"
   },
@@ -24,6 +27,7 @@
   "homepage": "https://github.com/natemoo-re/magic-element/tree/main/packages/magic-element#readme",
   "files": [
     "dist",
+    "MagicElement.astro",
     "CHANGELOG.md"
   ],
   "author": {

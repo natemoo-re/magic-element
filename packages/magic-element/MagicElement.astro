@@ -1,0 +1,47 @@
+---
+// @ts-expect-error
+import { markHTMLString } from "astro/runtime/server/index.js";
+
+interface Props {
+  name: `${string}-${string}`;
+  of: any;
+}
+
+const { name, of: Component } = Astro.props;
+const MagicChild = new Proxy(Component, {
+  async apply(target, thisArg, argArray) {
+    // Create default props
+    argArray[1] = new Proxy(
+      {},
+      {
+        get(target, property, receiver) {
+          return (
+            Reflect.get(target, property, receiver) ?? `{{${String(property)}}}`
+          );
+        },
+      }
+    );
+    // Create default slots
+    argArray[2] = new Proxy(
+      {},
+      {
+        get(_target, property, _receiver) {
+          if (property === "default") {
+            return markHTMLString(`<slot></slot>`);
+          }
+          return markHTMLString(`<slot name="${String(property)}"></slot>`);
+        },
+      }
+    );
+    const result = await Reflect.apply(target, thisArg, argArray);
+    return result;
+  },
+});
+---
+
+<template data-name={name}><MagicChild /></template>
+
+<script>
+import { init } from 'magic-element';
+init();
+</script>
