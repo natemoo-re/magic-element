@@ -4,7 +4,7 @@ const ZWJ = String.fromCharCode(8205);
 function getExpressions(value: string) {
 	TEMPLATE_RE.lastIndex = 0;
 	let m: RegExpExecArray | null = null;
-	let results: { value: string; index: number, lastIndex: number }[] = [];
+	let results: { value: string; index: number; lastIndex: number }[] = [];
 	while ((m = TEMPLATE_RE.exec(value))) {
 		const value = m[0].slice(2, -2).trim();
 		results.push({ value, index: m.index, lastIndex: m.index + m[0].length });
@@ -37,9 +37,7 @@ function bindAttr(host: HTMLElement, attr: Attr) {
 		const current = '';
 		const index = nodes.push(text, current) - 1;
 		const name =
-			attr.name === 'style'
-				? text.split(';').at(-1)?.trim().replace(/\:$/, '')
-				: undefined;
+			attr.name === 'style' ? text.split(';').at(-1)?.trim().replace(/\:$/, '') : undefined;
 		if (name) {
 			names.push(name);
 		}
@@ -87,8 +85,8 @@ function bindEventHandler(host: HTMLElement, attr: Attr) {
 	const parent = attr.ownerElement as HTMLElement;
 	const { name, value: fn } = attr;
 	parent.addEventListener(name.slice(1), (event) => {
-		return new Function('$', 'event', fn).call(parent, host, event)
-	})
+		return new Function('$', 'event', fn).call(parent, host, event);
+	});
 	parent.removeAttributeNode(attr);
 }
 function bindText(host: HTMLElement, node: Text) {
@@ -139,7 +137,9 @@ class MagicElement extends HTMLElement {
 
 	constructor() {
 		super();
-		const source = document.querySelector(`template[data-name="${this.localName}"]`) as HTMLTemplateElement;
+		const source = document.querySelector(
+			`template[data-name="${this.localName}"]`
+		) as HTMLTemplateElement;
 		for (const attr of source.attributes) {
 			if (attr.name === 'data-name') continue;
 			this.setAttribute(attr.name, attr.value);
@@ -176,7 +176,7 @@ class MagicElement extends HTMLElement {
 			processNode(node);
 		}
 		for (const action of actions) {
-			action()
+			action();
 		}
 
 		this.#children = children;
@@ -189,7 +189,7 @@ class MagicElement extends HTMLElement {
 		for (const attribute of this.attributes) {
 			// Reflect attributes created before initialization
 			(this as any)[attribute.name] = attribute.value;
-			this.removeAttributeNode(attribute)
+			this.removeAttributeNode(attribute);
 		}
 	}
 }
@@ -197,6 +197,6 @@ class MagicElement extends HTMLElement {
 export function init() {
 	for (const template of document.querySelectorAll('template[data-name]')) {
 		const name = (template as HTMLElement).dataset.name!;
-		customElements.define(name, class extends MagicElement { });
+		customElements.define(name, class extends MagicElement {});
 	}
 }
