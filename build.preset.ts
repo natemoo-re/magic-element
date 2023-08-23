@@ -8,8 +8,7 @@ export default definePreset({
 	rollup: {
 		emitCJS: false,
 		esbuild: {
-			target: ['esnext'],
-			sourceMap: false,
+			target: ['es2022']
 		},
 	},
 });
