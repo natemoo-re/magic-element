@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Vite App</title>
 	</head>
+
 	<body>
 		<div id="app">
 			<my-counter count="12"></my-counter>
@@ -13,10 +14,12 @@
 			<my-counter count="0"></my-counter>
 		</div>
 
-		<template data-name="my-counter" style="display: block">
-			<button onclick="$.count--">-</button>
-			<span>{{count}}</span>
-			<button onclick="$.count++">+</button>
+		<template data-name="my-counter">
+			<div style="color: {{color}}">
+				<button @click="$.count -= 1">-</button>
+				<span>{{ count }}</span>
+				<button @click="$.count++">+</button>
+			</div>
 		</template>
 
 		<script type="module">

@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm -r run build",
-    "start": "pnpm --filter @example/basic run start",
+    "build": "pnpm --filter magic-element run build",
+    "dev": "pnpm -r run dev",
+    "start": "pnpm --filter @example/basic run dev",
     "format": "pnpm run format:code",
     "format:code": "prettier -w . --cache",
     "format:imports": "organize-imports-cli ./packages/*/tsconfig.json",

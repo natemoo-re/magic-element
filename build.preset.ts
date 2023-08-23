@@ -2,13 +2,13 @@ import { definePreset } from 'unbuild';
 
 // @see https://github.com/unjs/unbuild
 export default definePreset({
+	failOnWarn: false,
 	clean: true,
 	declaration: true,
 	rollup: {
 		emitCJS: false,
-		inlineDependencies: true,
 		esbuild: {
-			minify: false,
+			target: ['esnext'],
 			sourceMap: false,
 		},
 	},
