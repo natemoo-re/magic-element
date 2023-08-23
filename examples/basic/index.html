@@ -4,16 +4,18 @@
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Vite App</title>
+		<title>Magic Element</title>
 	</head>
 
 	<body>
 		<div id="app">
-			<my-counter count="12"></my-counter>
-			<my-counter count="4"></my-counter>
+			<my-counter></my-counter>
+			<my-counter count="5"></my-counter>
 			<my-counter count="0"></my-counter>
 		</div>
 
+		<!-- define your template with a `data-name` attribute -->
+		<!-- interpolated values are automatically exposed as props -->
 		<template data-name="my-counter">
 			<div style="color: {{color}}">
 				<button @click="$.count -= 1">-</button>
@@ -23,8 +25,15 @@
 		</template>
 
 		<script type="module">
+			// Just init! Every `template[data-name]` will
+			// magically become a usable custom element
 			import { init } from 'magic-element';
 			init();
+
+			// Updates are granular and scoped to specific attributes
+			const counter = document.querySelector('my-counter');
+			counter.color = 'red';
+			counter.count = 1;
 		</script>
 	</body>
 </html>
