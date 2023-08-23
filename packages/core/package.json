@@ -1,0 +1,42 @@
+{
+  "name": "magic-element",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/natemoo-re/magic-element",
+    "directory": "packages/dom"
+  },
+  "bugs": {
+    "url": "https://github.com/natemoo-re/magic-element/issues"
+  },
+  "homepage": "https://github.com/natemoo-re/magic-element/tree/main/packages/magic-element#readme",
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "author": {
+    "name": "Nate Moore",
+    "email": "nate@natemoo.re",
+    "url": "https://twitter.com/n_moore"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@7.6.0",
+  "scripts": {
+    "build": "unbuild"
+  },
+  "devDependencies": {
+    "unbuild": "^1.1.1"
+  }
+}
